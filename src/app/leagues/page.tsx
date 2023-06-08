@@ -17,7 +17,7 @@ export default async function Home() {
             </h1>
             <div className="grid grid-cols1 sm:grid-cols-2 lg:grid-cols-4 gap-4 [&:not(:first-child)]:mt-6">
                 {data.map((league) => (
-                    <Link key={league.id} href={`/league/${league.slug}`}>
+                    <Link key={league.id} href={`/leagues/${league.id}`}>
                         <Card className="h-full hover:border-gray-300">
                             <CardHeader className="items-center text-center">
                                 <Image
