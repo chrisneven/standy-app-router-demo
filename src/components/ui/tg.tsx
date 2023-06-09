@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ComponentProps, FC, PropsWithChildren } from "react";
+import { ComponentProps, ComponentType, PropsWithChildren } from "react";
 
 export function P({
     className,
@@ -41,7 +41,7 @@ function createHeadingComponents() {
             />
         );
         return acc;
-    }, {} as Record<string, FC<HeaderProps>>);
+    }, {} as Record<string, ComponentType<HeaderProps>>);
 }
 
 export const { H1, H2, H3, H4, H5, H6 } = createHeadingComponents();
