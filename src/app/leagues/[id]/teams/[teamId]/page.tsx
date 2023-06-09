@@ -17,6 +17,7 @@ type Props = {
 };
 
 export default async function Page({ params: { teamId, id } }: Props) {
+    const playerPromise = api.leagues.team.players(id);
     const details = await api.leagues.team.details(id, teamId);
 
     return (
@@ -25,14 +26,18 @@ export default async function Page({ params: { teamId, id } }: Props) {
                 Team overview
             </h1>
             <Suspense fallback={<SkeletonPlayers />}>
-                <Players id={id} />
+                <Players playerPromise={playerPromise} />
             </Suspense>
         </div>
     );
 }
 
-async function Players({ id }: { id: string }) {
-    const players = await api.leagues.team.players(id);
+async function Players({
+    playerPromise,
+}: {
+    playerPromise: ReturnType<typeof api.leagues.team.players>;
+}) {
+    const players = await playerPromise;
     return (
         <div className="grid grid-cols-3 gap-4">
             {players.map((player, index) => (

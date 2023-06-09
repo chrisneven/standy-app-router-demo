@@ -42,7 +42,7 @@ export default async function TeamsLayout({
             </aside>
             <div className="flex-1">
                 <Link
-                    href={`/league/${id}`}
+                    href={`/leagues/${id}`}
                     className="text-blue-500 hover:underline"
                 >
                     Back to league

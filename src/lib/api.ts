@@ -92,6 +92,7 @@ const api = {
 
         team: {
             details: async (standingsId: string, id: string) => {
+                await sleep(5000);
                 const { standings } = await api.leagues.standings(standingsId);
                 const team = standings.find(
                     (standing) => standing.team.id === id
@@ -118,7 +119,7 @@ const api = {
                 );
             }),
             players: cache(async (id: string) => {
-                await sleep(2500);
+                await sleep(5000);
 
                 return Promise.resolve(
                     new Array(18).fill(null).map(createRandomPlayer)

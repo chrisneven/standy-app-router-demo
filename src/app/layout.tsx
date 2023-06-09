@@ -1,4 +1,6 @@
+import { NavLink } from "@/components/ui/navlink";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,13 +18,20 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <nav className="flex items-center justify-between flex-wrap bg-gray-800 p-6">
-                    <div className="flex items-center flex-shrink-0 text-white mr-6">
-                        <span className="font-semibold text-xl tracking-tight">
-                            Standy
-                        </span>
+                <nav className="bg-gray-800">
+                    <div className="container flex items-center justify-between flex-wrap p-6">
+                        <div className="flex items-center flex-shrink-0 text-white mr-6">
+                            <Link href="/">
+                                <span className="font-semibold text-xl tracking-tight">
+                                    Standy
+                                </span>
+                            </Link>
+                        </div>
+                        <div className="text-white space-x-6 flex">
+                            <NavLink href="/leagues">Leagues</NavLink>
+                            <NavLink href="/news">Latest News</NavLink>
+                        </div>
                     </div>
-                    <div className="block lg:hidden"></div>
                 </nav>
 
                 {children}
