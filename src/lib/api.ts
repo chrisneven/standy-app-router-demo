@@ -1,4 +1,6 @@
+import { faker } from "@faker-js/faker";
 import { cache } from "react";
+
 import { promisify } from "util";
 
 const url = "https://api-football-standings.azharimm.dev";
@@ -95,8 +97,6 @@ const api = {
                     (standing) => standing.team.id === id
                 )?.team;
 
-                console.log(team);
-
                 if (!team) {
                     throw new Error("Team not found");
                 }
@@ -104,7 +104,7 @@ const api = {
                 return team;
             },
             matches: cache(async (id: string) => {
-                await sleep(2500);
+                await sleep(5000);
 
                 return Promise.resolve(
                     new Array(5).fill(null).map((_, i) => ({
@@ -117,8 +117,30 @@ const api = {
                     }))
                 );
             }),
+            players: cache(async (id: string) => {
+                await sleep(2500);
+
+                return Promise.resolve(
+                    new Array(18).fill(null).map(createRandomPlayer)
+                );
+            }),
         },
     },
 };
 
 export default api;
+
+function createRandomPlayer() {
+    return {
+        id: faker.number.int(),
+        name: faker.person.fullName(),
+        position: faker.helpers.arrayElement([
+            "Goalkeeper",
+            "Defender",
+            "Midfielder",
+            "Forward",
+        ]),
+        image: faker.image.urlLoremFlickr({ category: "footballer" }),
+        country: faker.location.country(),
+    };
+}

@@ -17,8 +17,10 @@ type Props = {
 };
 
 export default async function Page({ params: { id } }: Props) {
-    const details = await api.leagues.details(id);
-    const { standings } = await api.leagues.standings(id);
+    const [details, { standings }] = await Promise.all([
+        api.leagues.details(id),
+        api.leagues.standings(id),
+    ]);
 
     return (
         <main className="container p-10 space-y-10">
